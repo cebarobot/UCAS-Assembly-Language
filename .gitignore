@@ -1,0 +1,9 @@
+# ignore all
+*
+!*/
+# documents
+!*.md
+!LICENCE
+!.gitignore
+# assembly language source files
+!*.S
