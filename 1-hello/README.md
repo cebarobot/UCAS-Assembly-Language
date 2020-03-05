@@ -133,3 +133,8 @@ _start:
 至此，第一个汇编程序 hello 就介绍完了。之后我们的程序基本都使用 AT&T 语法，运行在 Linux-64 平台上。
 
 练习：修改程序，输出“University of CAS\n”。
+
+## 参考资料
+* [AT&T 汇编入门 - Hello World](https://blog.csdn.net/chuck_huang/article/details/79922595)
+* [Linux系统调用：使用syscall](https://blog.csdn.net/hq815601489/article/details/80034589)
+* [Linux基础IO--文件描述符fd/重定向](https://blog.csdn.net/cherrydreamsover/article/details/79656356)
