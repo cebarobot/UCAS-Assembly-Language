@@ -1,4 +1,4 @@
-# hello.S
+# hello__64intel.S
     .intel_syntax noprefix          # 采用 Intel 语法，寄存器名前不加%
 .section .data
     output: .ascii "Hello world\n"

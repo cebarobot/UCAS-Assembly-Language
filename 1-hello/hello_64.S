@@ -1,4 +1,4 @@
-# hello.S
+# hello_64.S
 .section .data
     output: .ascii "Hello world\n"
 .section .text
@@ -6,7 +6,7 @@
 _start:
 # output
     movq $1, %rax
-    movq $2, %rdi
+    movq $1, %rdi
     movq $output, %rsi
     movq $12, %rdx
     syscall

@@ -69,20 +69,21 @@ ld -m elf_i386 hello.o -o hello     # 链接
 .global _start
 _start:
 # output
-    movq $1, %rax
-    movq $2, %rdi
-    movq $output, %rsi
-    movq $12, %rdx
-    syscall
+    movq $1, %rax                   # rax，系统调用号，写文件
+    movq $1, %rdi                   # rdi，参数 1，文件描述符 fd，标准输出
+    movq $output, %rsi              # rsi，参数 2，输出缓冲区地址
+    movq $12, %rdx                  # rdx，参数 3，字节序列的长度
+    syscall                         # 调用 Linux 系统调用
 # exit
-    movq $60, %rax
-    movq $0, %rdi
-    syscall
+    movq $60, %rax                  # rax，系统调用号，退出
+    movq $0, %rdi                   # rdi，参数 2，状态码/返回值
+    syscall                         # 调用 Linux 系统调用
 
 ```
 
 Linux-64 的汇编源码与 Linux-32 的有这些不同：
 * 系统调用指令不同：`syscall` 代替了 `int 0x80`；
+  * 在 Linux-64 系统中应当始终使用 `syscall` 调用系统调用；
 * 系统调用号不同：写文件为 1，程序退出为 60；
 * 参数寄存器不同；
 * 命令后缀不同：`q` 表示 64 位数据。
@@ -129,3 +130,6 @@ _start:
 
 ```
 
+至此，第一个汇编程序 hello 就介绍完了。之后我们的程序基本都使用 AT&T 语法，运行在 Linux-64 平台上。
+
+练习：修改程序，输出“University of CAS\n”。
