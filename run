@@ -1,0 +1,15 @@
+#! /bin/bash
+
+echo assembling...
+as $1.S -o $1.o
+
+echo assembling...
+ld $1.o -o $1
+
+echo running $1...
+echo -------------------------------------------------
+./$1
+RETURN_VALUE=$?
+
+echo -------------------------------------------------
+echo $1 exited with return value $RETURN_VALUE
