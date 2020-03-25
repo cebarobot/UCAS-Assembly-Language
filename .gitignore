@@ -7,5 +7,7 @@
 !.gitignore
 # assembly language source files
 !*.S
+# c source files
+!*.c
 # scripts
 !run
