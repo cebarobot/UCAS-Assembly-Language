@@ -23,4 +23,4 @@
 
 寻址格式为：
 * AT&T Syntax: `%segreg:disp(base, index, scale)`
-* Intel Syntax: `segreg:[base + index * scale +disp]`
+* Intel Syntax: `segreg:[base + index * scale + disp]`
