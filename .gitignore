@@ -7,9 +7,14 @@
 !.gitignore
 # assembly language source files
 !*.S
+*.tmp.s
 # c source files
 !*.c
 # scripts
 !run
 # Makefile
 !Makefile
+# defines
+!*.h
+# lds
+!*.lds
