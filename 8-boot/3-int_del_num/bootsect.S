@@ -74,10 +74,16 @@ next:
     xorb    %bh, %bh                # %bh = 0, video_page_number = 0
     int     $0x10                   # call VGA_display
 
+    movw    $22, %cx                 # %cx = 9, num_of_chars_in_buffer = 9
+    movw    $0x0007, %bx            # page 0, attribute 7 (normal)
+    movw    $msg1 - _boot, %bp      # %bp = msg1
+    movw    $0x1301, %ax            # write string(es:bp, cx), move cursor
+    int     $0x10                   # call VGA_display
+
     movw    $msg1 - _boot, %si
     int     $0x30
     
-    # movw    $9, %cx                 # %cx = 9, num_of_chars_in_buffer = 9
+    inc     %dh                     # %dh += 1, select next line
     movw    $0x0007, %bx            # page 0, attribute 7 (normal)
     movw    $msg1 - _boot, %bp      # %bp = msg1
     movw    $0x1301, %ax            # write string(es:bp, cx), move cursor
