@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <sys/time.h>
 
-static inline unsigned long rdtsc(void) {
-    unsigned long long tick;
-    asm volatile ("rdtsc":"=A"(tick));
-    return tick;
+long time_sub(struct timeval tv1, struct timeval tv2) {
+    long sec = tv2.tv_sec - tv1.tv_sec;
+    long usec = tv2.tv_usec - tv1.tv_usec;
+    if (usec < 0) {
+        sec -= 1;
+        usec += 1000000;
+    }
+    return sec * 1000000 + usec;
 }
 
 int main() {
@@ -35,13 +39,13 @@ int main() {
     );
     // printf("%ld\n", rdtsc());
     gettimeofday(&tv2, NULL);
-    cpufreq = (cycle2 - cycle1) / (tv2.tv_usec - tv1.tv_usec);
+    cpufreq = (cycle2 - cycle1) / (time_sub(tv1, tv2));
     
-    printf("cycle: %ld - %ld = %ld\n", cycle1, cycle2, cycle2 - cycle1);
-    printf("time1: %ld %ld\n", tv1.tv_sec, tv1.tv_usec);
-    printf("time2: %ld %ld\n", tv2.tv_sec, tv2.tv_usec);
+    printf("cycle: %ld\n", cycle2 - cycle1);
+    printf("time: %ld\n", time_sub(tv1, tv2));
     printf("The cpu frequency is %ld MHz\n", cpufreq);
-    cpufreq = 400000000 / (tv2.tv_usec - tv1.tv_usec);
-    printf("The cpu frequency is %ld MHz\n", cpufreq);
+
+    // cpufreq = 400000000 / (tv2.tv_usec - tv1.tv_usec);
+    // printf("The cpu frequency is %ld MHz\n", cpufreq);
     return 0;
 }
