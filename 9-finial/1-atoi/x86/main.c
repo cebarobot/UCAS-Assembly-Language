@@ -11,6 +11,10 @@ char str_set[][100] = {
     "UCAS welcome~",
     "1346792580852976431",
     "-1346792580852976431",
+    "2147483647",
+    "2147483648",
+    "-2147483648",
+    "-2147483649",
     "    \t\t-1346792580852976431UCAS",
     "    \t\t134679UCAS",
     ""
@@ -18,7 +22,7 @@ char str_set[][100] = {
 
 int main() {
     printf("Testing int atoi(const char *nptr) ...\n");
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 14; i++) {
         printf("\"%s\" : %d\n", str_set[i], atoi(str_set[i]));
     }
     return 0;
