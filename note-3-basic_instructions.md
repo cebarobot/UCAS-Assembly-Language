@@ -19,7 +19,7 @@
 * `index`：变址，可选；
 * `scale`：比例因数，可选；
 * `disp`：位移量，可选；
-* `segreg`：（我不知道这是啥……），可选；
+* `segreg`：段寄存器，可选；
 
 寻址格式为：
 * AT&T Syntax: `%segreg:disp(base, index, scale)`
