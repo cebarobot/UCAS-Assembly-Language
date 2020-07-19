@@ -1,15 +1,20 @@
 .globl	atoi
 .type atoi, @function
 atoi:   # int atoi(const char *nptr);
+    pushl   %esi                # retore %esi
+    pushl   %edi                # retore %edi
+
+    movl    8(%ebp), %edi       # %edi = nptr; // parameter 1
+
     xorl    %eax, %eax          # %eax = 0;
     xorl    %esi, %esi          # %esi = 0;
 
 # ignore space
-    movzbl  (%rdi), %ecx        # %ecx = *(%rdi);
+    movzbl  (%edi), %ecx        # %ecx = *(%edi);
     jmp     loop_space          # enter loop
 loop_space_body:
-    inc     %rdi                # %rdi ++;
-    movzbl  (%rdi), %ecx        # %ecx = *(%rdi);
+    inc     %edi                # %edi ++;
+    movzbl  (%edi), %ecx        # %ecx = *(%edi);
 loop_space:
     cmpb    $' ', %cl           # if (%cl == ' ') 
     je      loop_space_body     #     goto loop_space_body;
@@ -22,15 +27,15 @@ if_sign_pos:
     cmpb    $'+', %cl           # if (%cl == '+')
     jne     if_sign_neg
 
-    inc     %rdi                # %rdi ++;
-    movzbl  (%rdi), %ecx        # %ecx = *(%rdi);
+    inc     %edi                # %edi ++;
+    movzbl  (%edi), %ecx        # %ecx = *(%edi);
     jmp     if_sign_end
 if_sign_neg:
     cmpb    $'-', %cl           # else if (%cl == '-')
     jne     if_sign_end
 
-    inc     %rdi                # %rdi ++;
-    movzbl  (%rdi), %ecx        # %ecx = *(%rdi);
+    inc     %edi                # %edi ++;
+    movzbl  (%edi), %ecx        # %ecx = *(%edi);
     movl    $1, %esi            # %esi = 1
 if_sign_end:
 
@@ -51,8 +56,8 @@ convert_if_neg:
     sub     %ecx, %eax          # %eax -= %ecx
     jo      overflow            # if (overflow) goto overflow
 convert_if_end:
-    inc     %rdi                # %rdi ++;
-    movzbl  (%rdi), %ecx        # %ecx = *(%rdi);
+    inc     %edi                # %edi ++;
+    movzbl  (%edi), %ecx        # %ecx = *(%edi);
     sub     $'0', %ecx          # %ecx -= '0'
 loop_convert:
     cmpb    $10, %cl            # if (%cl < 10)
@@ -60,6 +65,8 @@ loop_convert:
 
 loop_convert_end:
 # exit atoi
+    popl    %edi                # resume %edi
+    popl    %esi                # resume %esi
     ret
 
 overflow:
