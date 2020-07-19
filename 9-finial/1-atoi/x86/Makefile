@@ -8,7 +8,7 @@ main: atoi.o main.o
 main.o: main.c
 	$(CC) -c main.c -o main.o
 
-atoi.o:
+atoi.o: atoi.S
 	$(AS) atoi.S -o atoi.o
 
 .PHONY: clean

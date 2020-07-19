@@ -4,7 +4,7 @@ atoi:   # int atoi(const char *nptr);
     pushl   %esi                # retore %esi
     pushl   %edi                # retore %edi
 
-    movl    8(%ebp), %edi       # %edi = nptr; // parameter 1
+    movl    12(%esp), %edi       # %edi = nptr; // parameter 1
 
     xorl    %eax, %eax          # %eax = 0;
     xorl    %esi, %esi          # %esi = 0;
