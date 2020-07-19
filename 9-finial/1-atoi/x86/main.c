@@ -23,7 +23,6 @@ char str_set[][100] = {
 int main() {
     printf("Testing int atoi(const char *nptr) ...\n");
     for (int i = 0; i < 14; i++) {
-        printf("%x\n", (int) str_set[i]);
         printf("\"%s\" : %d\n", str_set[i], atoi(str_set[i]));
     }
     return 0;
